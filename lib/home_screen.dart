@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/task_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -6,8 +7,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //bottom sheet text field controller
   TextEditingController _textController = TextEditingController();
 
+  //handel the check box
+  bool checkBoxValue = false;
+
+  //bottom sheet
   void displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -30,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Text('Add Task'),
                     TextField(
                       controller: _textController,
                       decoration: InputDecoration(
@@ -109,6 +116,47 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 margin: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: ListView(
+                  children: [
+                    TaskTile(
+                      checkBoxValue: checkBoxValue,
+                      checkBoxController: (newValue) {
+                        setState(() {
+                          checkBoxValue = newValue;
+                          print(checkBoxValue);
+                        });
+                      },
+                    ),
+                    TaskTile(
+                      checkBoxValue: checkBoxValue,
+                      checkBoxController: (newValue) {
+                        setState(() {
+                          checkBoxValue = newValue;
+                          print(checkBoxValue);
+                        });
+                      },
+                    ),
+                    TaskTile(
+                      checkBoxValue: checkBoxValue,
+                      checkBoxController: (newValue) {
+                        setState(() {
+                          checkBoxValue = newValue;
+                          print(checkBoxValue);
+                        });
+                      },
+                    ),
+                    TaskTile(
+                      checkBoxValue: checkBoxValue,
+                      checkBoxController: (newValue) {
+                        setState(() {
+                          checkBoxValue = newValue;
+                          print(checkBoxValue);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
