@@ -18,11 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
     showModalBottomSheet(
         context: context,
         builder: (ctx) {
-          return Scaffold(
-            //resizeToAvoidBottomInset solved the bottom overflowed when keyboard shows
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.grey.shade600,
-            body: Container(
+          return Container(
+            color: Color(0xff757575),
+            child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
