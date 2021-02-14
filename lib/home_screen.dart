@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/task_card.dart';
+import 'package:flutter_todo_app/tasks_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -115,13 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 margin: EdgeInsets.only(top: 30),
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: ListView(
-                  children: [
-                    TaskTile(),
-                    TaskTile(),
-                    TaskTile(),
-                  ],
-                ),
+                child: TasksList(),
               ),
             ),
           ],

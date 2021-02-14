@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 class TaskTileWidget extends StatelessWidget {
   final bool checkBoxValue;
   final Function checkboxController;
+  final String id;
+  final String title;
+  final String date;
 
-  TaskTileWidget(
-      {@required this.checkBoxValue, @required this.checkboxController});
+  TaskTileWidget({
+    @required this.checkBoxValue,
+    @required this.checkboxController,
+    @required this.id,
+    @required this.title,
+    @required this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +21,7 @@ class TaskTileWidget extends StatelessWidget {
       leading: Container(
         margin: EdgeInsets.only(top: 11),
         child: Text(
-          '10',
+          id,
           style: TextStyle(
             fontSize: 15,
           ),
@@ -21,11 +29,11 @@ class TaskTileWidget extends StatelessWidget {
         ),
       ),
       title: Text(
-        'title text',
+        title,
         style: TextStyle(
             decoration: checkBoxValue ? TextDecoration.lineThrough : null),
       ),
-      subtitle: Text('${DateTime.now()}'),
+      subtitle: Text(date),
       trailing: Checkbox(
         value: checkBoxValue,
         onChanged: checkboxController,
