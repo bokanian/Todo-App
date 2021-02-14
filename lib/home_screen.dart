@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/task_tile.dart';
+import 'package:flutter_todo_app/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -117,42 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: ListView(
                   children: [
-                    TaskTile(
-                      checkBoxValue: checkBoxValue,
-                      checkBoxController: (newValue) {
-                        setState(() {
-                          checkBoxValue = newValue;
-                          print(checkBoxValue);
-                        });
-                      },
-                    ),
-                    TaskTile(
-                      checkBoxValue: checkBoxValue,
-                      checkBoxController: (newValue) {
-                        setState(() {
-                          checkBoxValue = newValue;
-                          print(checkBoxValue);
-                        });
-                      },
-                    ),
-                    TaskTile(
-                      checkBoxValue: checkBoxValue,
-                      checkBoxController: (newValue) {
-                        setState(() {
-                          checkBoxValue = newValue;
-                          print(checkBoxValue);
-                        });
-                      },
-                    ),
-                    TaskTile(
-                      checkBoxValue: checkBoxValue,
-                      checkBoxController: (newValue) {
-                        setState(() {
-                          checkBoxValue = newValue;
-                          print(checkBoxValue);
-                        });
-                      },
-                    ),
+                    TaskTile(),
+                    TaskTile(),
+                    TaskTile(),
                   ],
                 ),
               ),
