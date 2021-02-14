@@ -21,7 +21,11 @@ class _TaskTileWidgetState extends State<TaskTileWidget> {
           textAlign: TextAlign.center,
         ),
       ),
-      title: Text('title text'),
+      title: Text(
+        'title text',
+        style: TextStyle(
+            decoration: checkBoxValue ? TextDecoration.lineThrough : null),
+      ),
       subtitle: Text('${DateTime.now()}'),
       trailing: Checkbox(
         value: checkBoxValue,
