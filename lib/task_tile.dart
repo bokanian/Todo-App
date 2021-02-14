@@ -8,12 +8,6 @@ class TaskTileWidget extends StatefulWidget {
 class _TaskTileWidgetState extends State<TaskTileWidget> {
   static bool isChecked = false;
 
-  void checkboxCallback(bool checkBoxValue) {
-    setState(() {
-      isChecked = checkBoxValue;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -35,7 +29,13 @@ class _TaskTileWidgetState extends State<TaskTileWidget> {
       subtitle: Text('${DateTime.now()}'),
       trailing: CheckBox(
         checkBoxValue: isChecked,
-        checkBoxToggle: checkboxCallback,
+        checkBoxToggle: (bool checkBoxValue) {
+          setState(
+            () {
+              isChecked = checkBoxValue;
+            },
+          );
+        },
       ),
     );
   }
