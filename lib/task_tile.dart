@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TaskTileWidget extends StatefulWidget {
-  @override
-  _TaskTileWidgetState createState() => _TaskTileWidgetState();
-}
+class TaskTileWidget extends StatelessWidget {
+  final bool checkBoxValue;
+  final Function checkboxController;
 
-class _TaskTileWidgetState extends State<TaskTileWidget> {
-  bool checkBoxValue = false;
+  TaskTileWidget(
+      {@required this.checkBoxValue, @required this.checkboxController});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +20,15 @@ class _TaskTileWidgetState extends State<TaskTileWidget> {
           textAlign: TextAlign.center,
         ),
       ),
-      title: Text('title text'),
+      title: Text(
+        'title text',
+        style: TextStyle(
+            decoration: checkBoxValue ? TextDecoration.lineThrough : null),
+      ),
       subtitle: Text('${DateTime.now()}'),
       trailing: Checkbox(
         value: checkBoxValue,
-        onChanged: (newValue) {
-          setState(() {
-            checkBoxValue = newValue;
-            print(checkBoxValue);
-          });
-        },
+        onChanged: checkboxController,
       ),
     );
   }
