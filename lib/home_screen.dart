@@ -10,37 +10,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   static String inputText;
 
-  static bool isChecked = false;
   static List<TaskModel> tasks = [
     TaskModel(
       id: 1,
       title: 'task number one',
       date: DateTime.now().toString(),
-      isCheck: isChecked,
     ),
     TaskModel(
       id: 2,
       title: 'task number one',
       date: DateTime.now().toString(),
-      isCheck: isChecked,
     ),
     TaskModel(
       id: 3,
       title: 'task number one',
       date: DateTime.now().toString(),
-      isCheck: isChecked,
     ),
   ];
 
-  void checkboxCallback(bool checkBoxValue) {
-    setState(() {
-      isChecked = checkBoxValue;
-      print(checkBoxValue);
-    });
-  }
-
+  //Bottom Sheet
   final TextEditingController _textController = TextEditingController();
-
   void displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -82,7 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(_textController.text);
+                      tasks.add(
+                        TaskModel(
+                            id: tasks.length + 1,
+                            title: inputText,
+                            date: DateTime.now().toString()),
+                      );
                       _textController.clear();
                     },
                     child: Text('Add'),
@@ -128,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    '12 tasks',
+                    tasks.length.toString(),
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -148,11 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 margin: EdgeInsets.only(top: 30),
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: TaskCard(
-                  tasks: tasks,
-                  checkboxCard: isChecked,
-                  checkboxController: checkboxCallback,
-                ),
+                child: TaskCard(tasks: tasks),
               ),
             ),
           ],

@@ -2,12 +2,15 @@ class TaskModel {
   final int id;
   final String title;
   final String date;
-  final bool isCheck;
+  bool isCheck;
 
   TaskModel({
     this.id,
     this.title,
     this.date,
-    this.isCheck,
+    this.isCheck = false,
   });
+  void toggleDone() {
+    isCheck = !isCheck;
+  }
 }
