@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/tasks_list.dart';
+import 'package:flutter_todo_app/model/task_model.dart';
+import 'package:flutter_todo_app/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,60 +8,92 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //bottom sheet text field controller
-  TextEditingController _textController = TextEditingController();
+  static String inputText;
 
-  //handel the check box
-  bool checkBoxValue = false;
+  static bool isChecked = false;
+  static List<TaskModel> tasks = [
+    TaskModel(
+      id: 1,
+      title: 'task number one',
+      date: DateTime.now().toString(),
+      isCheck: isChecked,
+    ),
+    TaskModel(
+      id: 2,
+      title: 'task number one',
+      date: DateTime.now().toString(),
+      isCheck: isChecked,
+    ),
+    TaskModel(
+      id: 3,
+      title: 'task number one',
+      date: DateTime.now().toString(),
+      isCheck: isChecked,
+    ),
+  ];
 
-  //bottom sheet
+  void checkboxCallback(bool checkBoxValue) {
+    setState(() {
+      isChecked = checkBoxValue;
+      print(checkBoxValue);
+    });
+  }
+
+  final TextEditingController _textController = TextEditingController();
+
   void displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (ctx) {
-          return Container(
-            color: Color(0xff757575),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
-                ),
-              ),
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: Container(
-                padding: EdgeInsets.all(30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text('Add Task'),
-                    TextField(
-                      controller: _textController,
-                      decoration: InputDecoration(
-                        labelText: 'new task',
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.clear),
-                          onPressed: () => _textController.clear(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        print(_textController.text);
-                        _textController.clear();
-                      },
-                      child: Text('Add'),
-                    )
-                  ],
-                ),
+      context: context,
+      builder: (ctx) {
+        return Container(
+          color: Color(0xff757575),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
               ),
             ),
-          );
-        });
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Container(
+              padding: EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Add Task'),
+                  TextField(
+                    onChanged: (newText) {
+                      inputText = newText;
+                    },
+                    controller: _textController,
+                    decoration: InputDecoration(
+                      labelText: 'new task',
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          _textController.clear();
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      print(_textController.text);
+                      _textController.clear();
+                    },
+                    child: Text('Add'),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -115,7 +148,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 margin: EdgeInsets.only(top: 30),
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: TasksList(),
+                child: TaskCard(
+                  tasks: tasks,
+                  checkboxCard: isChecked,
+                  checkboxController: checkboxCallback,
+                ),
               ),
             ),
           ],

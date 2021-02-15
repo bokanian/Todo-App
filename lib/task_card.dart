@@ -1,44 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/model/task_model.dart';
-import 'package:flutter_todo_app/task_tile.dart';
+import 'package:flutter_todo_app/task_tile_widget.dart';
 
-class TaskTile extends StatefulWidget {
+class TaskCard extends StatefulWidget {
+  final bool checkboxCard;
+  final List<TaskModel> tasks;
+  final Function checkboxController;
+
+  TaskCard({
+    @required this.tasks,
+    @required this.checkboxCard,
+    @required this.checkboxController,
+  });
+
   @override
-  _TaskTileState createState() => _TaskTileState();
+  _TaskCardState createState() => _TaskCardState();
 }
 
-class _TaskTileState extends State<TaskTile> {
-  static bool isChecked = false;
-
-  static List<TaskModel> tasks = [
-    TaskModel(
-      id: 1,
-      title: 'task number one',
-      date: DateTime.now().toString(),
-      isCheck: isChecked,
-    ),
-  ];
-
-  void checkboxCallback(bool checkBoxValue) {
-    setState(() {
-      isChecked = checkBoxValue;
-      print(checkBoxValue);
-    });
-  }
-
+class _TaskCardState extends State<TaskCard> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        children: tasks
+        children: widget.tasks
             .map((e) => Card(
                   child: TaskTileWidget(
                     id: e.id.toString(),
                     title: e.title,
                     date: e.date,
-                    checkBoxValue: isChecked,
-                    checkboxController: checkboxCallback,
+                    checkBoxValue: widget.checkboxCard,
+                    checkboxController: widget.checkboxController,
                   ),
-                  color: isChecked ? Colors.grey : Colors.green.shade300,
+                  color:
+                      widget.checkboxCard ? Colors.grey : Colors.green.shade300,
                 ))
             .toList());
   }
