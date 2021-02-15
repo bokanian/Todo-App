@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/model/task_data.dart';
 import 'package:flutter_todo_app/model/task_model.dart';
 import 'package:flutter_todo_app/task_card.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   static String inputText;
-
-  static List<TaskModel> tasks = [
-    TaskModel(
-      id: 1,
-      title: 'task number one',
-      date: DateTime.now().toString(),
-    ),
-    TaskModel(
-      id: 2,
-      title: 'task number one',
-      date: DateTime.now().toString(),
-    ),
-    TaskModel(
-      id: 3,
-      title: 'task number one',
-      date: DateTime.now().toString(),
-    ),
-  ];
 
   //Bottom Sheet
   final TextEditingController _textController = TextEditingController();
@@ -71,12 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      tasks.add(
-                        TaskModel(
-                            id: tasks.length + 1,
-                            title: inputText,
-                            date: DateTime.now().toString()),
-                      );
+                      //TODO add new task below method work same
+                      // final task = TaskModel(
+                      //   id: Provider.of<TasksData>(context, listen: false)
+                      //           .tasksCount +
+                      //       1,
+                      //   title: inputText,
+                      //   date: DateTime.now().toString(),
+                      // );
+                      // Provider.of<TasksData>(context, listen: false)
+                      //     .tasks
+                      //     .add(task);
+                      Provider.of<TasksData>(context, listen: false)
+                          .addTask(inputText);
+
+                      Navigator.pop(context);
                       _textController.clear();
                     },
                     child: Text('Add'),
@@ -122,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    tasks.length.toString(),
+                    '${Provider.of<TasksData>(context).tasksCount} Tasks',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -142,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 margin: EdgeInsets.only(top: 30),
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: TaskCard(tasks: tasks),
+                child: TaskCard(),
               ),
             ),
           ],
