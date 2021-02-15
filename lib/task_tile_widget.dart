@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TaskTileWidget extends StatefulWidget {
+class TaskTileWidget extends StatelessWidget {
   final bool checkBoxValue;
   final Function checkboxController;
   final String id;
@@ -14,50 +14,28 @@ class TaskTileWidget extends StatefulWidget {
     @required this.title,
     @required this.date,
   });
-
-  @override
-  _TaskTileWidgetState createState() => _TaskTileWidgetState();
-}
-
-class _TaskTileWidgetState extends State<TaskTileWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Container(
-        margin: EdgeInsets.only(top: 11),
-        child: Text(
-          widget.id,
-          style: TextStyle(
-            fontSize: 15,
+        leading: Container(
+          margin: EdgeInsets.only(top: 11),
+          child: Text(
+            id,
+            style: TextStyle(
+              fontSize: 15,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
         ),
-      ),
-      title: Text(
-        widget.title,
-        style: TextStyle(
-            decoration:
-                widget.checkBoxValue ? TextDecoration.lineThrough : null),
-      ),
-      subtitle: Text(widget.date),
-      trailing: CheckBoxWidget(
-          checkboxState: widget.checkBoxValue,
-          checkboxController: widget.checkboxController),
-    );
-  }
-}
-
-class CheckBoxWidget extends StatelessWidget {
-  final bool checkboxState;
-  final Function checkboxController;
-  CheckBoxWidget(
-      {@required this.checkboxState, @required this.checkboxController});
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: checkboxState,
-      onChanged: checkboxController,
-    );
+        title: Text(
+          title,
+          style: TextStyle(
+              decoration: checkBoxValue ? TextDecoration.lineThrough : null),
+        ),
+        subtitle: Text(date),
+        trailing: Checkbox(
+          value: checkBoxValue,
+          onChanged: checkboxController,
+        ));
   }
 }
