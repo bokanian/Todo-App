@@ -4,11 +4,9 @@ import 'package:flutter_todo_app/task_tile_widget.dart';
 
 class TaskCard extends StatefulWidget {
   final List<TaskModel> tasks;
-  final Function checkboxController;
 
   TaskCard({
     @required this.tasks,
-    @required this.checkboxController,
   });
 
   @override
@@ -26,7 +24,7 @@ class _TaskCardState extends State<TaskCard> {
                     title: e.title,
                     date: e.date,
                   ),
-                  color: e.isCheck ? Colors.grey : Colors.green.shade300,
+                  color: Colors.blue.shade300,
                 ))
             .toList());
   }
