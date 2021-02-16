@@ -1,5 +1,4 @@
-photo_2021-02-16 03.13.19.jpeg
-photo_2021-02-16 03.13.23.jpeg
+https://github.com/bokanian/Todo-App/blob/main/photo_2021-02-16%2003.13.19.jpeg
 
 photo_2021-02-16 03.13.23.jpeg
 
