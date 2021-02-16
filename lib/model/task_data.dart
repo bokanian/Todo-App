@@ -22,6 +22,7 @@ class TasksData extends ChangeNotifier {
     ),
   ];
 
+  // create UnmodifiableListView
   UnmodifiableListView<TaskModel> get tasks {
     return UnmodifiableListView(_tasks);
   }
@@ -33,11 +34,23 @@ class TasksData extends ChangeNotifier {
 //  instead: Provider.of<TasksData>(context).tasks.length
   void addTask(String newTaskTitle) {
     final task = TaskModel(
-      id: tasksCount + 1,
+      id: tasksCount - 1,
       title: newTaskTitle,
       date: DateTime.now().toString(),
     );
     _tasks.add(task);
+    notifyListeners();
+  }
+
+//  toggle checkbox and controller
+  void updateTask(TaskModel taskModel) {
+    taskModel.toggleDone();
+    notifyListeners();
+  }
+
+//  remove task
+  void removeTask(TaskModel task) {
+    _tasks.remove(task);
     notifyListeners();
   }
 }

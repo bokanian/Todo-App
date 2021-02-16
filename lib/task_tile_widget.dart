@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
 
-class TaskTileWidget extends StatefulWidget {
+class TaskTileWidget extends StatelessWidget {
   final String id;
   final String title;
   final String date;
+  final bool isChecked;
+  final Function checkboxCallback;
+  final Function longPress;
 
   TaskTileWidget({
     @required this.id,
     @required this.title,
     @required this.date,
+    @required this.isChecked,
+    @required this.checkboxCallback,
+    @required this.longPress,
   });
-
-  @override
-  _TaskTileWidgetState createState() => _TaskTileWidgetState();
-}
-
-class _TaskTileWidgetState extends State<TaskTileWidget> {
-  bool isChecked = false;
-  void checkboxCallback(bool checkboxState) {
-    setState(() {
-      isChecked = checkboxState;
-      print(isChecked);
-      print(widget.id);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: longPress,
       leading: Container(
         margin: EdgeInsets.only(top: 11),
         child: Text(
-          widget.id,
+          id,
           style: TextStyle(
             fontSize: 15,
           ),
@@ -39,31 +32,17 @@ class _TaskTileWidgetState extends State<TaskTileWidget> {
         ),
       ),
       title: Text(
-        widget.title,
+        title,
         style: TextStyle(
-            color: isChecked ? Colors.red : null,
+            color: isChecked ? Colors.red.shade700 : null,
             decoration: isChecked ? TextDecoration.lineThrough : null),
       ),
-      subtitle: Text(widget.date),
-      trailing: CheckboxWidget(
-        checkboxState: isChecked,
-        checkboxOnchange: checkboxCallback,
+      subtitle: Text(date),
+      trailing: Checkbox(
+        value: isChecked,
+        onChanged: checkboxCallback,
+        activeColor: Colors.red.shade400,
       ),
-    );
-  }
-}
-
-class CheckboxWidget extends StatelessWidget {
-  final bool checkboxState;
-  final Function checkboxOnchange;
-  CheckboxWidget({this.checkboxState, this.checkboxOnchange});
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: checkboxState,
-      onChanged: checkboxOnchange,
-      activeColor: Colors.redAccent,
     );
   }
 }
